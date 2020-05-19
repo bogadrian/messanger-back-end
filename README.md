@@ -1,1 +1,1 @@
-back-end for Messanger App to be attached to Park Your Tir App (works only togheter) 
+back-end for Messanger App to be attached to Park Your Tir App (works only together) 
