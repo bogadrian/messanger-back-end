@@ -33,17 +33,19 @@ mongoose
 io.on('connect', socket => {
   socket.on(
     'join',
-    ({ name, reciver, reciverEmail, myEmail, room }, callback) => {
+    ({ name, room, reciver, myEmail, reciverEmail }, callback) => {
       const id = socket.id;
       const { user, error } = addMsg({
-        id,
         name,
+        room,
+        id,
         reciver,
         myEmail,
-        reciverEmail,
-        room
+        reciverEmail
       });
+
       if (error) throw new Error(error);
+
       socket.join(user.room);
 
       callback();
@@ -56,8 +58,8 @@ io.on('connect', socket => {
     io.to(user.room).emit('message', { user: user.name, text: message });
 
     addMessage(
-      user.room,
       user.name,
+      user.room,
       user.reciver,
       user.myEmail,
       user.reciverEmail,

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-const Chat = require('./chatModel');
 const Text = require('./textModel');
 
 router.get('/', (req, res) => {
@@ -51,8 +50,6 @@ router.get('/:room', async (req, res) => {
 });
 
 router.patch('/toggle/:id/:read', async (req, res) => {
-  console.log(req.params.read);
-
   if (!req.params.id) {
     throw new Error('No data provided');
   }
@@ -62,10 +59,9 @@ router.patch('/toggle/:id/:read', async (req, res) => {
       $set: { read: req.params.read }
     },
     function (err, read) {
-      console.log(read);
+      console.log(err);
     }
   );
-  console.log(updatedRead);
 
   res.status(200).json({
     status: 'success',
